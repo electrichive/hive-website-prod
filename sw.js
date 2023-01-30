@@ -27,43 +27,35 @@ workbox.core.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "framework-3c8df7c38c1be18c8bfa.js"
+    "url": "framework-ba1e31de8a824ba7acac.js"
   },
   {
     "url": "styles.4b127eb0a25cfb6cd221.css"
   },
   {
-    "url": "app-128bab9a632fb8ffa772.js"
+    "url": "app-616214db43c5c33df25e.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "09bc28494a8c08342f9c4a0f65dd288b"
+    "revision": "5bbedb027c239065eccbf0c2e8014ae2"
   },
   {
-    "url": "webpack-runtime-1c5412626961e2d61ff4.js"
+    "url": "webpack-runtime-18757599f46bcbfaf425.js"
   },
   {
     "url": "component---cache-caches-gatsby-plugin-offline-app-shell-js-29fd2c62d887e48360fb.js"
   },
   {
-    "url": "page-data/offline-plugin-app-shell-fallback/page-data.json",
-    "revision": "f2c002077289a7e1ac538802bc7f5314"
+    "url": "polyfill-c0fadaa261b5b2543979.js"
   },
   {
-    "url": "page-data/app-data.json",
-    "revision": "f8c23ce53c6cc157af1818dc5994f146"
+    "url": "af145db2f062e694745154d75559c25c073c4548-4919f8f79940ea92976f.js"
   },
   {
-    "url": "polyfill-fd47c471d9913d252251.js"
+    "url": "cc66c7a10e36909d80bfb2506a61f43ef9a7a3b1-c1193ea45daa037c893d.js"
   },
   {
-    "url": "af145db2f062e694745154d75559c25c073c4548-7ffe1724d851a6207a22.js"
-  },
-  {
-    "url": "cc66c7a10e36909d80bfb2506a61f43ef9a7a3b1-e6e68c929fc332301482.js"
-  },
-  {
-    "url": "component---src-pages-about-index-tsx-202778d1d87fb9bbd4c2.js"
+    "url": "component---src-pages-about-index-tsx-7fd8576233dab2566be5.js"
   },
   {
     "url": "page-data/about/page-data.json",
@@ -75,7 +67,7 @@ self.__precacheManifest = [
   },
   {
     "url": "page-data/sq/d/127410513.json",
-    "revision": "fe31bc68c419a17bb4f636c1dbc32bf0"
+    "revision": "bb088626fbba73a761be3f437c201bc9"
   },
   {
     "url": "page-data/sq/d/1700984419.json",
@@ -98,6 +90,10 @@ self.__precacheManifest = [
     "revision": "a9f9e37bb99babdc14c18dfd66a10539"
   },
   {
+    "url": "page-data/app-data.json",
+    "revision": "37b548e91ef25c8e4e717215aff825d1"
+  },
+  {
     "url": "component---src-pages-contact-index-tsx-06e8fd7a4269586114c7.js"
   },
   {
@@ -106,7 +102,7 @@ self.__precacheManifest = [
   },
   {
     "url": "manifest.webmanifest",
-    "revision": "431041f9970344770dcce2f2ac0d2de1"
+    "revision": "5ba9f8282b9ab426d2dd1d157e1260c0"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
@@ -193,12 +189,12 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
   lastNavigationRequest = event.request.url
 
   let { pathname } = new URL(event.request.url)
-  pathname = pathname.replace(new RegExp(`^/hive-website`), ``)
+  pathname = pathname.replace(new RegExp(`^`), ``)
 
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/hive-website/app-128bab9a632fb8ffa772.js`))) {
+  if (!resources || !(await caches.match(`/app-616214db43c5c33df25e.js`))) {
     return await fetch(event.request)
   }
 
@@ -211,7 +207,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
     }
   }
 
-  const offlineShell = `/hive-website/offline-plugin-app-shell-fallback/index.html`
+  const offlineShell = `/offline-plugin-app-shell-fallback/index.html`
   const offlineShellWithKey = workbox.precaching.getCacheKeyForURL(offlineShell)
   return await caches.match(offlineShellWithKey)
 })
